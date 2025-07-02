@@ -1,1 +1,1 @@
-# Healthcare AI\nNext.js application for AI-driven healthcare solutions, built with TypeScript, React, and planned integrations with Redis and GraphQL for enhanced scalability.
+# Healthcare AI\nNext.js app for AI-driven healthcare solutions, with TypeScript and planned Redis/GraphQL integrations.
