@@ -1,0 +1,65 @@
+[33mcommit f2ed161b3bbdaac3aeff25112bf84f7b789ccdf8[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m
+Author: Muneeb Khan <muneebak2021@gmail.com>
+Date:   Wed Jul 2 14:30:19 2025 +0500
+
+    Update README with project details
+
+M	README.md
+
+[33mcommit 6db0870f310b43cf9e0bd29a7e0da93f0075aba2[m
+Author: Muneeb Khan <muneebak2021@gmail.com>
+Date:   Wed Jul 2 14:17:36 2025 +0500
+
+    Enhance README with project overview
+
+M	README.md
+
+[33mcommit 6b7914efd2d2dcdb32651fba3702ab91fba8b645[m
+Author: Muneeb Khan <muneebak2021@gmail.com>
+Date:   Wed Jul 2 14:16:17 2025 +0500
+
+    Update .gitignore for Next.js project
+
+M	.gitignore
+
+[33mcommit 97a81c444331edae8743bcc1a656be13d71d0137[m
+Author: Muneeb Khan <muneebak2021@gmail.com>
+Date:   Wed Jul 2 14:10:51 2025 +0500
+
+    Add README for healthcare-ai project
+
+M	README.md
+
+[33mcommit c291aa58226eba793bede2f4fce642e6e9c44997[m
+Author: Muneeb Khan <muneebak2021@gmail.com>
+Date:   Wed Jul 2 14:03:36 2025 +0500
+
+    first commit
+
+M	README.md
+
+[33mcommit 8f7ee5078aaa8c046a5a78ea7c61f9bcdd0c16b2[m
+Author: Muneeb Khan <muneebak2021@gmail.com>
+Date:   Wed Jul 2 13:25:31 2025 +0500
+
+    Initial commit: Healthcare AI translation app
+
+A	.gitignore
+A	README.md
+A	eslint.config.mjs
+A	next.config.ts
+A	package-lock.json
+A	package.json
+A	postcss.config.mjs
+A	public/file.svg
+A	public/globe.svg
+A	public/next.svg
+A	public/vercel.svg
+A	public/window.svg
+A	src/app/api/assemblyai/route.ts
+A	src/app/api/translate/route.ts
+A	src/app/favicon.ico
+A	src/app/globals.css
+A	src/app/layout.tsx
+A	src/app/page.tsx
+A	tsconfig.json
