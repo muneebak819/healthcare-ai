@@ -62,7 +62,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Transcription timed out' }, { status: 504 });
     }
     return NextResponse.json({ transcript: transcriptText });
-  } catch (e) {
+  } catch {
     return NextResponse.json({ error: 'AssemblyAI transcription failed' }, { status: 500 });
   }
 } 

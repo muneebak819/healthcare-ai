@@ -27,7 +27,7 @@ export async function POST(req: NextRequest) {
     const data = await response.json();
     const translated = data.choices?.[0]?.message?.content?.trim() || '';
     return NextResponse.json({ translated });
-  } catch (e) {
+  } catch {
     return NextResponse.json({ error: 'Translation failed' }, { status: 500 });
   }
 } 

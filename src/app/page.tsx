@@ -21,7 +21,6 @@ export default function Home() {
   const [translated, setTranslated] = useState("");
   const [inputLang, setInputLang] = useState("en-US");
   const [outputLang, setOutputLang] = useState("es-ES");
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const recognitionRef = useRef<any>(null);
 
@@ -36,11 +35,13 @@ export default function Home() {
     recognition.lang = inputLang;
     recognition.interimResults = true;
     recognition.continuous = true;
-    recognition.onresult = (event: any) => {
+    recognition.onresult = (event: unknown) => {
+      if (!event || typeof event !== 'object' || !('resultIndex' in event) || !('results' in event)) return;
+      const evt = event as { resultIndex: number; results: any[] };
       let final = '';
-      for (let i = event.resultIndex; i < event.results.length; ++i) {
-        if (event.results[i].isFinal) {
-          final += event.results[i][0].transcript;
+      for (let i = evt.resultIndex; i < evt.results.length; ++i) {
+        if (evt.results[i].isFinal) {
+          final += evt.results[i][0].transcript;
         }
       }
       if (final) setTranscript((prev) => (prev ? prev + ' ' : '') + final);
@@ -57,8 +58,6 @@ export default function Home() {
   };
 
   const handleTranslate = async () => {
-    setLoading(true);
-    setError("");
     setTranslated("");
     try {
       const res = await fetch("/api/translate", {
@@ -81,7 +80,6 @@ export default function Home() {
       setError("Translation failed. Please try again.");
       setTranslated("");
     }
-    setLoading(false);
   };
 
   const handleSpeak = () => {
