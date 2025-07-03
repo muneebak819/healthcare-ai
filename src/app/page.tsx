@@ -22,38 +22,35 @@ export default function Home() {
   const [inputLang, setInputLang] = useState("en-US");
   const [outputLang, setOutputLang] = useState("es-ES");
   const [error, setError] = useState("");
-  const recognitionRef = useRef<unknown>(null);
+  const recognitionRef = useRef<any>(null);
 
   const startListening = () => {
     if (!('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)) {
       alert('Speech Recognition API not supported in this browser.');
       return;
     }
-    const SpeechRecognition =
-      (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
-    const recognition = new SpeechRecognition();
+    const SpeechRecognitionConstructor = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+    const recognition = new SpeechRecognitionConstructor();
     recognition.lang = inputLang;
     recognition.interimResults = true;
     recognition.continuous = true;
-    recognition.onresult = (event: unknown) => {
-      if (!event || typeof event !== 'object' || !('resultIndex' in event) || !('results' in event)) return;
-      const evt = event as { resultIndex: number; results: { isFinal: boolean; 0: { transcript: string } }[] };
+    recognition.onresult = (event: any) => {
       let final = '';
-      for (let i = evt.resultIndex; i < evt.results.length; ++i) {
-        if (evt.results[i].isFinal) {
-          final += evt.results[i][0].transcript;
+      for (let i = event.resultIndex; i < event.results.length; ++i) {
+        if (event.results[i].isFinal) {
+          final += event.results[i][0].transcript;
         }
       }
       if (final) setTranscript((prev) => (prev ? prev + ' ' : '') + final);
     };
     recognition.onend = () => setListening(false);
-    (recognitionRef.current as any) = recognition;
+    recognitionRef.current = recognition;
     recognition.start();
     setListening(true);
   };
 
   const stopListening = () => {
-    (recognitionRef.current as any)?.stop();
+    recognitionRef.current?.stop();
     setListening(false);
   };
 
