@@ -22,7 +22,7 @@ export default function Home() {
   const [inputLang, setInputLang] = useState("en-US");
   const [outputLang, setOutputLang] = useState("es-ES");
   const [error, setError] = useState("");
-  const recognitionRef = useRef<any>(null);
+  const recognitionRef = useRef<unknown>(null);
 
   const startListening = () => {
     if (!('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)) {
@@ -37,7 +37,7 @@ export default function Home() {
     recognition.continuous = true;
     recognition.onresult = (event: unknown) => {
       if (!event || typeof event !== 'object' || !('resultIndex' in event) || !('results' in event)) return;
-      const evt = event as { resultIndex: number; results: any[] };
+      const evt = event as { resultIndex: number; results: { isFinal: boolean; 0: { transcript: string } }[] };
       let final = '';
       for (let i = evt.resultIndex; i < evt.results.length; ++i) {
         if (evt.results[i].isFinal) {
@@ -47,17 +47,18 @@ export default function Home() {
       if (final) setTranscript((prev) => (prev ? prev + ' ' : '') + final);
     };
     recognition.onend = () => setListening(false);
-    recognitionRef.current = recognition;
+    (recognitionRef.current as any) = recognition;
     recognition.start();
     setListening(true);
   };
 
   const stopListening = () => {
-    recognitionRef.current?.stop();
+    (recognitionRef.current as any)?.stop();
     setListening(false);
   };
 
   const handleTranslate = async () => {
+    setError("");
     setTranslated("");
     try {
       const res = await fetch("/api/translate", {
@@ -76,7 +77,7 @@ export default function Home() {
       } else {
         setTranslated(data.translated || "");
       }
-    } catch (e) {
+    } catch {
       setError("Translation failed. Please try again.");
       setTranslated("");
     }
